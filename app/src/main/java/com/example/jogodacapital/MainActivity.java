@@ -20,9 +20,10 @@ public class MainActivity<array> extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-    int x = new Random().nextInt(9);
+    int x = new Random().nextInt(10);
     int ponto = 0;
     int tentativas = 0;
+    int sorteio = 0;
     String[] estados = {"Parana", "Sao Paulo", "Amazonas", "Rio de Janeiro","Bahia","Ceara","Minas Gerais","Acre","Alagoas","Macapa","Rio Grande do Norte","Rio Grande do Sul","Piaui","Goias","Paraiba"};
     String[] capitais = {"Curitiba", "Sao Paulo", "Manaus", "Rio de Janeiro","Salvador","Fortaleza", "Belo Horizonte","Rio Branco","Maceio","Amapa","Natal","Porto Alegre","Teresina","Goiania","Joao Pessoa"};
 
@@ -40,6 +41,7 @@ public class MainActivity<array> extends AppCompatActivity {
         TextView out = findViewById(R.id.textViewOutput); //sorteio
         TextView entrada = findViewById(R.id.textEntrada); // entrada
         TextView saida = findViewById(R.id.textViewSaida);
+        sorteio = 0;
 
 
         x = x+1;
@@ -84,24 +86,37 @@ public class MainActivity<array> extends AppCompatActivity {
         {
             if(resposta.equals(capitais[x]))
             {
-                saida.setText("acertou!");
-                ponto+=10;
-                score.setText(String.valueOf(ponto));
+                if(sorteio == 0)
+                {
+                    saida.setText("acertou!");
+                    ponto+=10;
+                    score.setText(String.valueOf(ponto));
+                    sorteio = 1;
+                }
+                else
+                {
+                    if(sorteio == 1)
+                    {
+                        saida.setText("clique em próxima");
+                    }
+                }
+
             }
             else
             {
-                saida.setText("errou");
+                if(sorteio == 1)
+                {
+                    saida.setText("clique em próxima");
+                }
+                else
+                {
+                    saida.setText("errou");
+                    sorteio = 1;
+                }
+
             }
-
         }
-        //saida.setText(String.valueOf(x));
 
-
-
-        //out.setText(estado);
-        //pontos.setText(String.valueOf(ponto));
-        //entrada.setText("");
-        //out.setText(String.valueOf(x));
     }
 
 }
